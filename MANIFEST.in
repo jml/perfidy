@@ -1,0 +1,6 @@
+include LICENSE
+include Makefile
+include MANIFEST.in
+include NEWS
+include README.md
+include .gitignore
