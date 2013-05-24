@@ -1,4 +1,18 @@
 __all__ = [
+    'caller',
+    'compose',
+    'dichotomy',
+    'dict_subtract',
+    'filter_dict',
+    'filter_keys',
+    'filter_values',
+    'identity',
+    'list_subtract',
+    'map_dict',
+    'map_keys',
+    'map_values',
+    'on_items',
+    'wrap_result',
     'safe_hasattr',
     'try_import',
     'try_imports',
@@ -8,6 +22,22 @@ from ._extras import (
     safe_hasattr,
     try_import,
     try_imports,
+    )
+from ._func import (
+    caller,
+    compose,
+    dichotomy,
+    dict_subtract,
+    filter_dict,
+    filter_keys,
+    filter_values,
+    identity,
+    list_subtract,
+    map_dict,
+    map_keys,
+    map_values,
+    on_items,
+    wrap_result,
     )
 
 
