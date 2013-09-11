@@ -1,4 +1,6 @@
 # perfidy
 
+A library adding some important data structures and generic functions to
+Python.
 
-Things Python should have had.
+Also contains some code to improve Python's reflection tools.
