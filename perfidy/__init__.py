@@ -6,6 +6,7 @@ __all__ = [
     'filter_dict',
     'filter_keys',
     'filter_values',
+    'frozendict',
     'identity',
     'list_subtract',
     'map_dict',
@@ -18,6 +19,7 @@ __all__ = [
     'try_imports',
     ]
 
+from ._dict import frozendict
 from ._extras import (
     safe_hasattr,
     try_import,
