@@ -5,7 +5,6 @@ from ._hamt import (
     )
 
 
-# XXX: Switch to under_style_names?
 # XXX: Add functions as supplements for methods?
 
 class frozendict(object):
