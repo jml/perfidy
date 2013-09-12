@@ -384,7 +384,7 @@ class FrozenDictTests(TestCase):
         self.assertEqual(d, frozendict(zip(itertools.count(10), list("klmnopq"))))
 
 
-    def test_withUpdate(self):
+    def test_merge(self):
         """
         frozendicts can be constructed from other mappings and sequences.
         """
@@ -392,7 +392,7 @@ class FrozenDictTests(TestCase):
         self.assertEqual(f, frozendict().with_pair(1, 2))
         self.assertEqual(f, frozendict({1: 2}))
         self.assertEqual(f, frozendict([(1, 2)]))
-        self.assertEqual(f, frozendict().withUpdate({1: 2}))
+        self.assertEqual(f, frozendict().merge({1: 2}))
 
 
     def test_repr(self):

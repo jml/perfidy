@@ -20,10 +20,10 @@ class frozendict(object):
         if input is _absent:
             return f
         else:
-            return f.withUpdate(input)
+            return f.merge(input)
 
 
-    def withUpdate(self, pairs):
+    def merge(self, pairs):
         """
         Return a new frozendict with the mappings in C{pairs}.
 
