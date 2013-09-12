@@ -7,7 +7,26 @@ from ._hamt import (
 
 # XXX: Add functions as supplements for methods?
 
+# XXX: Add merge_with
+
+# XXX: Maybe make 'assoc' alias for 'with_pair' and 'dissoc' alias for
+# 'without'?
+
+# XXX: kwargs versions of constructor, with_pair, and merge would probably be nice.
+
+# XXX: a zipmap would be nice
+
+# XXX: A select implementation would be very nice
+
+# XXX: Things from set that might be nice:
+# - isdisjoint
+# - issubset / <=
+# - ispropersubset / <
+# - issuperset / >=
+
+
 class frozendict(object):
+    """A dictionary that will not change."""
 
     # TODO: Docstring
 
@@ -22,6 +41,7 @@ class frozendict(object):
             return f.merge(input)
 
 
+    # XXX: Allow taking multiple dicts
     def merge(self, pairs):
         """
         Return a new frozendict with the mappings in C{pairs}.
@@ -30,8 +50,6 @@ class frozendict(object):
         all C{k} in keys.  If not, then adds C{(k, v)} for all C{(k, v)} in
         pairs.
         """
-        # XXX: Possible rename to with_pairs
-        # XXX: Possible rename to mergeWith
         # XXX: It must be possible to rewrite this more efficiently, without
         # creating a new frozendict for each pair, perhaps by internally using
         # mutation.
@@ -122,6 +140,7 @@ class frozendict(object):
             return self.root.iteritems()
 
 
+    # XXX: Take multiple parameters, and raise error if odd number.
     def with_pair(self, k, v):
         """
         Return a new frozendict that maps 'k' to 'v'.
@@ -162,6 +181,7 @@ class frozendict(object):
             return newf
 
 
+    # XXX: Implement this perhaps more efficiently
     def __repr__(self):
         #for today, we're straight up cheatin'
         d = dict(self)
