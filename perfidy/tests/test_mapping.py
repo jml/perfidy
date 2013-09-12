@@ -62,7 +62,7 @@ class FrozenDictTests(TestCase):
         """
         k, v = ('stuff', 42)
         d = frozendict()
-        d2 = d.withPair(k, v)
+        d2 = d.with_pair(k, v)
         self.assertEqual(len(d2), 1)
         self.assertEqual(d2[k], v)
         self.assertTrue(k in d2)
@@ -83,20 +83,20 @@ class FrozenDictTests(TestCase):
         """
         k, v = ('stuff', 42)
         d = frozendict()
-        d2 = d.withPair(k, v)
-        d3 = d2.withPair(k, v)
+        d2 = d.with_pair(k, v)
+        d3 = d2.with_pair(k, v)
         self.assertTrue(d2 is d3)
 
 
     def test_replaceAssoc(self):
         """
-        Calling withPair with a key existing in the frozendict creates a new
+        Calling with_pair with a key existing in the frozendict creates a new
         frozendict with the given value replacing the existing one.
         """
         k, v = ('stuff', 42)
         d = frozendict()
-        d2 = d.withPair(k, v)
-        d3 = d2.withPair(k, 24)
+        d2 = d.with_pair(k, v)
+        d3 = d2.with_pair(k, 24)
         self.assertEqual(d2[k], v)
         self.assertEqual(d3[k], 24)
         self.assertEqual(len(d2), 1)
@@ -113,7 +113,7 @@ class FrozenDictTests(TestCase):
         """
         k, v = ('stuff', 42)
         d = frozendict()
-        d2 = d.withPair(k, v)
+        d2 = d.with_pair(k, v)
         self.assertEqual(d2.root.kind, 'BitmapIndexedNode')
         self.assertEqual(bitcount(d2.root.bitmap), 1)
         self.assertNotEqual(d2.root.bitmap & bitpos(hash(k), 0), 0)
@@ -131,7 +131,7 @@ class FrozenDictTests(TestCase):
         d = frozendict()
         #integers hash to themselves, so no collisions here
         for i in range(16):
-            d = d.withPair(i, vals[i])
+            d = d.with_pair(i, vals[i])
         self.assertEqual(len(d), 16)
         self.assertEqual(set(d.keys()), set(range(16)))
         self.assertEqual(set(d.values()), set(vals))
@@ -151,7 +151,7 @@ class FrozenDictTests(TestCase):
         d = frozendict()
         vals = 'abcdefghijklmnopq'
         for i in range(17):
-            d = d.withPair(i, vals[i])
+            d = d.with_pair(i, vals[i])
         self.assertEqual(len(d), 17)
         self.assertEqual(set(d.keys()), set(range(17)))
         self.assertEqual(set(d.values()), set(vals))
@@ -169,8 +169,8 @@ class FrozenDictTests(TestCase):
         d = frozendict()
         k1, v1 = 'stuff', 42
         k2, v2 = HashTester(k1), 43
-        d2 = d.withPair(k1, v1)
-        d3 = d2.withPair(k2, v2)
+        d2 = d.with_pair(k1, v1)
+        d3 = d2.with_pair(k2, v2)
         self.assertEqual(set(d3.keys()), set([k1, k2]))
         self.assertEqual(set(d3.values()), set([v1, v2]))
         self.assertEqual(set(d3.items()), set([(k1, v1), (k2, v2)]))
@@ -184,13 +184,13 @@ class FrozenDictTests(TestCase):
         Conversion to ArrayNodes works when the converted node contains collision subnodes.
         """
         k1, v1 = HashTester(0), 'collision'
-        d = frozendict().withPair(k1, v1)
+        d = frozendict().with_pair(k1, v1)
         vals = 'abcdefghijklmnopqr'
         for i in range(18):
-            d = d.withPair(i, vals[i])
+            d = d.with_pair(i, vals[i])
 
         k2, v2 = HashTester(1), 'collision'
-        d = d.withPair(k2, v2)
+        d = d.with_pair(k2, v2)
         self.assertEqual(len(d), 20)
         self.assertEqual(set(d.items()), set([(k1, v1), (k2, v2)] + zip(range(18), vals)))
         self.assertEqual(d.root.kind, 'ArrayNode')
@@ -206,7 +206,7 @@ class FrozenDictTests(TestCase):
 
         self.assertRaises(KeyError, lambda: d[20])
         self.assertEqual(d.get(20, 'x'), 'x')
-        self.assertTrue(d.withPair(k2, v2) is d)
+        self.assertTrue(d.with_pair(k2, v2) is d)
 
 
     def test_handleExtraCollision(self):
@@ -216,7 +216,7 @@ class FrozenDictTests(TestCase):
         k1, v1 = 'stuff', 42
         k2, v2 = HashTester(k1), 43
         k3, v3 = HashTester(k1), 44
-        d = frozendict().withPair(k1, v1).withPair(k2, v2).withPair(k3, v3)
+        d = frozendict().with_pair(k1, v1).with_pair(k2, v2).with_pair(k3, v3)
         self.assertEqual(set(d.items()), set([(k1, v1), (k2, v2), (k3, v3)]))
 
 
@@ -227,7 +227,7 @@ class FrozenDictTests(TestCase):
 
         k1, v1 = 'stuff', 42
         k2, v2 = HashTester('stuff'), 43
-        d = frozendict().withPair(k1, v1).withPair(k2, v2)
+        d = frozendict().with_pair(k1, v1).with_pair(k2, v2)
         self.assertRaises(KeyError, lambda: d[HashTester(k1)])
 
 
@@ -239,12 +239,12 @@ class FrozenDictTests(TestCase):
         k2, v2 = HashTester(k1), 43
         k3, v3 = HashTester(k1), 44
         k3, v3 = HashTester(k1), 44
-        d = frozendict().withPair(k1, v1).withPair(k2, v2).withPair(k3, v3)
-        d2 = d.withPair(k2, 45)
+        d = frozendict().with_pair(k1, v1).with_pair(k2, v2).with_pair(k3, v3)
+        d2 = d.with_pair(k2, 45)
         self.assertEqual(set(d.items()), set([(k1, v1), (k2, v2), (k3, v3)]))
         self.assertEqual(set(d2.items()), set([(k1, v1), (k2, 45), (k3, v3)]))
 
-        self.assertTrue(d.withPair(k2, v2) is d)
+        self.assertTrue(d.with_pair(k2, v2) is d)
 
 
     def test_localOnlyCollision(self):
@@ -253,7 +253,7 @@ class FrozenDictTests(TestCase):
         """
         k1, v1 = HashTester("stuff", 0x17), 42
         k2, v2 = HashTester("morestuff", 0x37), 43
-        d = frozendict().withPair(k1, v1).withPair(k2, v2)
+        d = frozendict().with_pair(k1, v1).with_pair(k2, v2)
         self.assertEqual(len(d), 2)
         self.assertEqual(set(d.items()), set([(k1, v1), (k2, v2)]))
         self.assertEqual(d.root.kind, 'BitmapIndexedNode')
@@ -268,7 +268,7 @@ class FrozenDictTests(TestCase):
         k1, v1 = HashTester("stuff", 0x17), 42
         k1a, v1a = HashTester("stuff", 0x17), 44
         k2, v2 = HashTester("morestuff", 0x37), 43
-        d = frozendict().withPair(k1, v1).withPair(k1a, v1a).withPair(k2, v2)
+        d = frozendict().with_pair(k1, v1).with_pair(k1a, v1a).with_pair(k2, v2)
         self.assertEqual(len(d), 3)
         self.assertEqual(set(d.items()), set([(k1, v1), (k1a, v1a), (k2, v2)]))
 
@@ -284,15 +284,15 @@ class FrozenDictTests(TestCase):
         self.assertNotEqual(d0a, {})
 
         k1, v1 = HashTester(0), 'collision'
-        d1a = frozendict().withPair(k1, v1)
-        d1b = frozendict().withPair(k1, v1)
+        d1a = frozendict().with_pair(k1, v1)
+        d1b = frozendict().with_pair(k1, v1)
         vals = 'abcdefghijklmnopqr'
         for i in range(18):
-            d1a = d1a.withPair(i, vals[i])
-            d1b = d1b.withPair(i, vals[i])
+            d1a = d1a.with_pair(i, vals[i])
+            d1b = d1b.with_pair(i, vals[i])
         k2, v2 = HashTester(1), 'collision'
-        d1a = d1a.withPair(k2, v2)
-        d1b = d1b.withPair(k2, v2)
+        d1a = d1a.with_pair(k2, v2)
+        d1b = d1b.with_pair(k2, v2)
 
         self.assertEqual(hash(d1a), hash(d1b), "equal frozendicts don't hash the same")
 
@@ -301,8 +301,8 @@ class FrozenDictTests(TestCase):
         self.assertTrue(d1a != d0a)
         self.assertTrue(d1a == d1b, "equal frozendicts don't compare equal")
         self.assertFalse(d1a != d1b)
-        self.assertFalse(d1b.withPair('extra', 'pair') == d1b.withPair('extra', HashTester('pair')))
-        self.assertTrue(d1b.withPair('extra', 'pair') != d1b.withPair('extra', HashTester('pair')))
+        self.assertFalse(d1b.with_pair('extra', 'pair') == d1b.with_pair('extra', HashTester('pair')))
+        self.assertTrue(d1b.with_pair('extra', 'pair') != d1b.with_pair('extra', HashTester('pair')))
 
 
     def test_emptyWithout(self):
@@ -319,7 +319,7 @@ class FrozenDictTests(TestCase):
         """
         k, v = ('stuff', 42)
         d = frozendict()
-        d2 = d.withPair(k, v)
+        d2 = d.with_pair(k, v)
         self.assertEqual(d, d2.without(k))
         self.assertEqual(d2, d2.without('nothing'))
 
@@ -331,9 +331,9 @@ class FrozenDictTests(TestCase):
         k1, v1 = HashTester("stuff", 0x17), 42
         k1a, v1a = HashTester("stuff", 0x17), 44
         k2, v2 = HashTester("morestuff", 0x37), 43
-        d = frozendict().withPair(k1, v1).withPair(k1a, v1a).withPair(k2, v2)
+        d = frozendict().with_pair(k1, v1).with_pair(k1a, v1a).with_pair(k2, v2)
         self.assertTrue(d.without(HashTester("stuff", 0x17)) is d)
-        self.assertEqual(d.without(k1).without(k1a), frozendict().withPair(k2, v2))
+        self.assertEqual(d.without(k1).without(k1a), frozendict().with_pair(k2, v2))
         self.assertEqual(d.without(k2).without(k1).without(k1a), frozendict())
 
 
@@ -345,7 +345,7 @@ class FrozenDictTests(TestCase):
         vals = 'abcdefghijklmnopq'
         for i in range(17):
             previousD = d
-            d = d.withPair(i, vals[i])
+            d = d.with_pair(i, vals[i])
         self.assertEqual(previousD, d.without(16))
         self.assertTrue(d.without(HashTester(13)) is d)
         self.assertTrue(d.without(HashTester(27)) is d)
@@ -356,13 +356,13 @@ class FrozenDictTests(TestCase):
         'without' works with hash collision nodes.
         """
         k1, v1 = HashTester(0), 'collision'
-        d = frozendict().withPair(k1, v1)
+        d = frozendict().with_pair(k1, v1)
         vals = 'abcdefghijklmnopqr'
         for i in range(18):
-            d = d.withPair(i, vals[i])
+            d = d.with_pair(i, vals[i])
 
         k2, v2 = HashTester(1), 'collision'
-        d2 = d.withPair(k2, v2)
+        d2 = d.with_pair(k2, v2)
 
         self.assertEqual(d2.without(k2), d)
         self.assertTrue(d2.without(HashTester(k1)) is d2)
@@ -376,7 +376,7 @@ class FrozenDictTests(TestCase):
         d = frozendict()
         vals = 'abcdefghijklmnopq'
         for i in range(17):
-            d = d.withPair(i, vals[i])
+            d = d.with_pair(i, vals[i])
         for i in range(10):
             d = d.without(i)
         self.assertEqual(bitcount(d.root.bitmap), 7)
@@ -389,7 +389,7 @@ class FrozenDictTests(TestCase):
         frozendicts can be constructed from other mappings and sequences.
         """
         f = frozendict([(1, 2)])
-        self.assertEqual(f, frozendict().withPair(1, 2))
+        self.assertEqual(f, frozendict().with_pair(1, 2))
         self.assertEqual(f, frozendict({1: 2}))
         self.assertEqual(f, frozendict([(1, 2)]))
         self.assertEqual(f, frozendict().withUpdate({1: 2}))
@@ -402,7 +402,7 @@ class FrozenDictTests(TestCase):
         md = {"stuff": 1,  17: [1, 2, 'a']}
         fd = frozendict()
         for k, v in md.iteritems():
-            fd = fd.withPair(k, v)
+            fd = fd.with_pair(k, v)
         fr = repr(fd)
         self.assertTrue(fr.startswith("frozendict("))
         self.assertTrue(fr.endswith(")"))

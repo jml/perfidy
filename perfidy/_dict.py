@@ -31,7 +31,7 @@ class frozendict(object):
         all C{k} in keys.  If not, then adds C{(k, v)} for all C{(k, v)} in
         pairs.
         """
-        # XXX: Possible rename to withPairs
+        # XXX: Possible rename to with_pairs
         # XXX: Possible rename to mergeWith
         # XXX: It must be possible to rewrite this more efficiently, without
         # creating a new frozendict for each pair, perhaps by internally using
@@ -40,10 +40,10 @@ class frozendict(object):
         result = self
         if keys is not None:
             for k in pairs.keys():
-                result = result.withPair(k, pairs[k])
+                result = result.with_pair(k, pairs[k])
         else:
             for k, v in pairs:
-                result = result.withPair(k, v)
+                result = result.with_pair(k, v)
         return result
 
 
@@ -123,7 +123,7 @@ class frozendict(object):
             return self.root.iteritems()
 
 
-    def withPair(self, k, v):
+    def with_pair(self, k, v):
         """
         Return a new frozendict that maps 'k' to 'v'.
         """
