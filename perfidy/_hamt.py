@@ -1,3 +1,8 @@
+# Author: Allen Short <washort@twistedmatrix.com>
+#
+# Originally from https://code.launchpad.net/~washort/+junk/perseus, copied,
+# adapted, and distributed with permission.
+
 _absent = object()
 _not_found = object()
 

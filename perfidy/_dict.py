@@ -1,3 +1,10 @@
+"""Immutable dict implementation."""
+
+# Author: Allen Short <washort@twistedmatrix.com>
+#
+# Originally from https://code.launchpad.net/~washort/+junk/perseus, copied,
+# adapted, and distributed with permission.
+
 from ._hamt import (
     _absent,
     _not_found,
