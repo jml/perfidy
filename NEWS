@@ -1,5 +1,10 @@
 # perfidy news
 
+## 0.0.2 (2013-10-05)
+
+Include Allen Short's implementation of `frozendict`, with his permission,
+from his project [perseus](http://code.launchpad.net/~washort/+junk/perseus).
+
 ## 0.0.1 (2013-05-24)
 
 Fork from [extras](https://github.com/testing-cabal/extras), because 'extras'
