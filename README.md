@@ -1,3 +1,8 @@
+# Deprecated
+
+I'm not working on this, and really don't have the time to maintain it
+properly (or even at all).
+
 # perfidy
 
 A library adding some important data structures and generic functions to
